@@ -99,10 +99,17 @@
 //     res.status(500).json({ error: "Internal Server Error" });
 //   }
 // };
+const express = require("express");
+const bodyParser = require("body-parser");
+
 require("dotenv").config();
 const TelegramBot = require("node-telegram-bot-api");
 const token = process.env.TOKEN;
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(token);
+
+const app = express();
+
+app.use(bodyParser.json());
 
 let isSurveyActive = false;
 let currentQuestion = 0;
@@ -200,13 +207,10 @@ async function saveAnswer(chatId, answer) {
   }
 }
 
-// Додайте експортовану функцію для Vercel
-module.exports = async (req, res) => {
-  try {
-    // ваш код обробки запитань або інша логіка
-    res.status(200).json({ message: "bot is working" });
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
+// Ваші решта коду, якщо є, тут
+
+// Замість bot.polling(), слід використовувати слухання запитів для Webhook
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
