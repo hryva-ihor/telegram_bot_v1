@@ -168,3 +168,20 @@ function saveAnswer(chatId, answer) {
     bot.sendMessage(chatId, "Дякую за участь у опитуванні!");
   }
 }
+
+// Додайте експортовану функцію для Vercel
+exports.handler = async (event, context) => {
+  try {
+    // Ваш код обробки запитань або інша логіка
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: "bot is working" }),
+    };
+  } catch (error) {
+    console.error("Error:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Internal Server Error" }),
+    };
+  }
+};
