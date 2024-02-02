@@ -78,8 +78,9 @@
   //   currentQuestion++;
   // }
 }
+require("dotenv").config();
 const TelegramBot = require("node-telegram-bot-api");
-const token = `6755412982:AAFu2NUC7jsSJjacCCPRVced-A5pyZHie40`;
+const token = process.env.TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 
 let isSurveyActive = false;
